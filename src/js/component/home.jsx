@@ -16,7 +16,7 @@ const Home = () => {
 
 	const [eventos, setEventos] = useState([]);
 
-	const eliminar = {
+	const borrar =  {
 		    
 			//SetLista(lista.filter(el => el !== index))
 			//const filtredData = this.state.items.filter(item => item.id !== itemId);
@@ -49,7 +49,7 @@ const Home = () => {
 						className="list-group-item"
 						onMouseOver={() => setEventos(index)}>
 						{item}
-						{eventos == index ? <button onClick={eliminar}>X</button> : ""}
+						{eventos == index ? <button onClick={lista.filter(el => el !== index)}>X</button> : ""}
 					</li>
 				))}
 			</ul>
