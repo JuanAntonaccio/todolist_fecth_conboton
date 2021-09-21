@@ -3,6 +3,8 @@ import React, { useState } from "react";
 const Formulario = () => {
 	const [tarea, setTarea] = useState({});
 	const [lista, setLista] = useState([]);
+	const [eventos, setEventos] = useState([]);
+
 	fetch("https://assets.breatheco.de/apis/fake/todos/user/juan_m", {
 		method: "GET",
 		//body: JSON.stringify(todos),
@@ -60,11 +62,10 @@ const Formulario = () => {
 		setTarea("");
 	};
 
-	const [eventos, setEventos] = useState([]);
-
 	const eliminarTarea = () => {
 		const arrayFiltrado = lista.filter((item, index) => index !== eventos);
 		setLista(arrayFiltrado);
+		ActualizarPost();
 	};
 
 	return (
@@ -75,7 +76,7 @@ const Formulario = () => {
 						placeholder="Ingrese Tarea"
 						className="form-control"
 						type="text"
-						value={tarea}
+						value={tarea.label}
 						onChange={cargarDato}></input>
 				</div>
 
