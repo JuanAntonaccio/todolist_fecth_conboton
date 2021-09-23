@@ -28,9 +28,11 @@ const Formulario = () => {
 	};
 	useEffect(() => {
 		getDatos();
+		// lo hace la primera vez
 	}, []);
 
 	const ActualizarPost = valor => {
+		// le paso la lista como parametro
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/juan_m", {
 			method: "PUT",
 			body: JSON.stringify(valor),
@@ -58,7 +60,6 @@ const Formulario = () => {
 
 	const enviarDatos = event => {
 		event.preventDefault();
-		console.log("entre a enviar datos");
 		if (!tarea.label.trim()) {
 			alert("Campo vacio no se guarda");
 			return;
