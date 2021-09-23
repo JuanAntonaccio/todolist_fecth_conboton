@@ -29,13 +29,17 @@ const Formulario = () => {
 	useEffect(() => {
 		getDatos();
 		// lo hace la primera vez
+		return () => {
+			//actualizarPost();
+			console.log("ENTRE en desmontado");
+		};
 	}, []);
 
-	const ActualizarPost = valor => {
+	const actualizarPost = () => {
 		// le paso la lista como parametro
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/juan_m", {
 			method: "PUT",
-			body: JSON.stringify(valor),
+			body: JSON.stringify(lista),
 			headers: {
 				"Content-Type": "application/json"
 			}
@@ -66,14 +70,14 @@ const Formulario = () => {
 		}
 		let otraLista = [...lista, tarea];
 		setLista(otraLista);
-		ActualizarPost(otraLista);
+		//ActualizarPost(otraLista);
 		setTarea({ label: "", done: false });
 	};
 
 	const eliminarTarea = () => {
 		const arrayFiltrado = lista.filter((item, index) => index !== eventos);
 		setLista(arrayFiltrado);
-		ActualizarPost(arrayFiltrado);
+		//ActualizarPost(arrayFiltrado);
 	};
 
 	return (
