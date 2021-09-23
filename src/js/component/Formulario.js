@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Formulario = () => {
 	const [tarea, setTarea] = useState({});
@@ -26,28 +26,31 @@ const Formulario = () => {
 				console.log(error);
 			});
 	};
-	const ActualizarPost = () => {
+	useEffect(() => {
+		getDatos();
+	}, []);
+
+	const ActualizarPost = valor => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/juan_m", {
 			method: "PUT",
-			body: JSON.stringify(lista),
+			body: JSON.stringify(valor),
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
 			.then(resp => {
-				return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+				return resp; // (returns promise) will try to parse the result as json as return a promise that you can .then for results
 			})
 			.then(data => {
 				//here is were your code should start after the fetch finishes
 				console.log(data); //this will print on the console the exact object received from the server
-				setLista(data);
 			})
 			.catch(error => {
 				//error handling
 				console.log(error);
 			});
 	};
-	getDatos();
+
 	const cargarDato = event => {
 		let tar_aux = { label: event.target.value, done: false };
 		setTarea(tar_aux);
@@ -55,20 +58,21 @@ const Formulario = () => {
 
 	const enviarDatos = event => {
 		event.preventDefault();
-		if (!tarea.trim()) {
+		console.log("entre a enviar datos");
+		if (!tarea.label.trim()) {
 			alert("Campo vacio no se guarda");
 			return;
 		}
-
-		setLista([...lista, tarea]);
-		ActualizarPost();
-		setTarea("");
+		let otraLista = [...lista, tarea];
+		setLista(otraLista);
+		ActualizarPost(otraLista);
+		setTarea({ label: "", done: false });
 	};
 
 	const eliminarTarea = () => {
 		const arrayFiltrado = lista.filter((item, index) => index !== eventos);
 		setLista(arrayFiltrado);
-		ActualizarPost();
+		ActualizarPost(arrayFiltrado);
 	};
 
 	return (
