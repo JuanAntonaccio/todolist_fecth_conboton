@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Formulario from "./Formulario";
 
 const Home = () => {
+	const [visible, setVisible] = useState(true);
 	return (
 		<div className="container mt-10">
 			<h1>Todos</h1>
-			<Formulario />
+			<button onClick={() => setVisible(!visible)}>
+				{visible ? "Ocultar" : "Mostrar"}
+			</button>
+			{visible ? <Formulario /> : ""}
 		</div>
 	);
 };

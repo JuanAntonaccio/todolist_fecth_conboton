@@ -31,7 +31,7 @@ const Formulario = () => {
 		// lo hace la primera vez
 		return () => {
 			//actualizarPost();
-			console.log("ENTRE en desmontado");
+			alert("ENTRE en desmontado");
 		};
 	}, []);
 
